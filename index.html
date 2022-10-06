@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Matadores</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="panel scores">
+            <div class="score">
+                <h1>Jogador</h1>
+                <div class="life-bar">
+                    <div class="life"></div>
+                </div>
+                <span class="jogadorPorcentagem">{{vidaJogador}} %</span>
+                <div></div>
+            </div>
+            <div class="score">
+                <h1>Mega Invasor</h1>
+                <div class="life-bar">
+                    <div class="life"></div>
+                </div>
+                <span class="invasorPorcentagem">{{vidaInvasor}} %</span>
+                <div></div>
+            </div>
+        </div>
+        <div v-show="!isIniciarJogo" class="panel result">
+            <div v-show="voceGanhou" class="win">Você ganhoou!!! :)</div>
+            <div v-show="voceGanhou" class="lose">Você perdeeu! :(</div>
+        </div>
+        <div class="panel buttons">
+
+            <template>
+                <button v-show="isIniciarJogo" class="btn new-game" @click="iniciarGame">Iniciar
+                    Jogo</button>
+                <button v-show="isAtaque" @click="ataque" class=" btn attack">Ataque</button>
+                <button v-show="isAtaqueEspecial" @click="ataqueEspecial" class="btn especial-attack">Ataque
+                    Especial</button>
+                <button v-show="isCurar" @click="curar" class="btn heal">Curar</button>
+                <button v-show="isDesistir" @click="desistir" class="btn give-up">Desistir</button>
+            </template>
+        </div>
+        <div v-show="isIniciarJogo" class="panel logs">
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script src="./app.js">
+
+    </script>
+</body>
+
+</html>
