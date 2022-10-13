@@ -14,7 +14,7 @@
             <div class="score">
                 <h1>Jogador</h1>
                 <div class="life-bar">
-                    <div class="life"></div>
+                    <div class="life" v-bind:class="{danger:addClassDangerJogador}"></div>
                 </div>
                 <span class="jogadorPorcentagem">{{vidaJogador}} %</span>
                 <div></div>
@@ -22,21 +22,20 @@
             <div class="score">
                 <h1>Mega Invasor</h1>
                 <div class="life-bar">
-                    <div class="life"></div>
+                    <div class="life" v-bind:class="{danger:addClassDangerInvasor}"></div>
                 </div>
                 <span class="invasorPorcentagem">{{vidaInvasor}} %</span>
                 <div></div>
             </div>
         </div>
-        <div v-show="!isIniciarJogo" class="panel result">
-            <div v-show="voceGanhou" class="win">Você ganhoou!!! :)</div>
-            <div v-show="voceGanhou" class="lose">Você perdeeu! :(</div>
+        <div v-show="isPainelResult" class="panel result">
+            <div v-show="isvoceGanhou" v-if="isPainelResult" class="win"> Você ganhoou!!! :)</div>
+            <div v-show="!isvoceGanhou" v- else="isPainelResult" class="lose">Você perdeeu! :(</div>
         </div>
         <div class="panel buttons">
 
             <template>
-                <button v-show="isIniciarJogo" class="btn new-game" @click="iniciarGame">Iniciar
-                    Jogo</button>
+                <button v-show="isIniciarJogo" class="btn new-game" @click="iniciarGame">Iniciar Jogo</button>
                 <button v-show="isAtaque" @click="ataque" class=" btn attack">Ataque</button>
                 <button v-show="isAtaqueEspecial" @click="ataqueEspecial" class="btn especial-attack">Ataque
                     Especial</button>
@@ -44,9 +43,12 @@
                 <button v-show="isDesistir" @click="desistir" class="btn give-up">Desistir</button>
             </template>
         </div>
-        <div v-show="isIniciarJogo" class="panel logs">
+        <div v-show="painelLog" class="panel logs">
             <ul>
-                <li></li>
+                <template v-for="log in logs" v-if="desistir">
+                    <li class="invasor">{{log.invasor}} </li>
+                    <li class="player">{{log.jogador}} </li>
+                </template>
             </ul>
         </div>
     </div>
